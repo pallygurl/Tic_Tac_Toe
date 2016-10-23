@@ -31,3 +31,10 @@ def player_1_tic
   player1
 end
 
+def player_2_tic(player1)
+  if player1 == "X"
+    "O"
+  else
+    "X"
+  end
+end 
