@@ -17,12 +17,13 @@ class Game
     def select_player_2
         puts """
     
-            Who would you like to play against?
-            Press   1 - Human
+            Pick your poison!
+
+                    1 - Human
                     2 - Random AI
                     3 - Sequential AI
                     
-            Then ENTER!
+            Then press ENTER
         """
         who = {1 => Human, 2 => RandomAi, 3 => SequentialAi}
         choice = gets.chomp.to_i
@@ -40,7 +41,7 @@ class Game
     def print_board
         puts """
         
-    Let's get started!
+    Here we go...
     Sample board with numbers:
         
      1 | 2 | 3
@@ -77,7 +78,7 @@ class Game
         puts "#{current_player} wins!"        
         else
             board.full_board?
-            puts "You tied!"
+            puts "Tie game"
         end
     end
 
