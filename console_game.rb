@@ -1,14 +1,16 @@
 require_relative "board.rb"
 require_relative "console_human.rb"
+require_relative "sequential_ai.rb"
+
 
 class Game
-    attr_accessor :board, :player_1, :player_2, :current_player
-
+    attr_accessor :board, :player_1, :player_2, :current_player     #instance variables are things an object knows about itself. 
+                                                                    #they represent an object's state, and can have unique values.
     def initialize(player_1, player_2)
         @board = Board.new
-        @player_1 = player_1
+        @player_1 = player_1            #player_1 is a local variable passed to the instance variable of @player_1
         @player_2 = player_2
-        @current_player = player_2
+        @current_player = player_2      #player_2 is a local variable passed to the instance variable @current_player
     end
 
     def change_player
