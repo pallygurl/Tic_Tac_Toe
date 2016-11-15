@@ -1,24 +1,4 @@
-##### Win: If the player has two in a row, they can place a third to get three in a row.
-
-##### Block: If the opponent has two in a row, the player must play the third themselves to block the opponent.
-
-# Fork: Create an opportunity where the player has two threats to win (two non-blocked lines of 2).
-
-# Blocking an opponent's fork:
-
-# Option 1: The player should create two in a row to force the opponent into defending, as long as it doesn't result in them creating a fork. For example, if "X" has a corner, "O" has the center, and "X" has the opposite corner as well, "O" must not play a corner in order to win. (Playing a corner in this scenario creates a fork for "X" to win.)
-
-# Option 2: If there is a configuration where the opponent can fork, the player should block that fork.
-
-# Center: A player marks the center. (If it is the first move of the game, playing on a corner gives "O" more opportunities to make a mistake and may therefore be the better choice; however, it makes no difference between perfect players.)
-
-# Opposite corner: If the opponent is in the corner, the player plays the opposite corner.
-
-# Empty corner: The player plays in a corner square.
-
-# Empty side: The player plays in a middle square on any of the 4 sides.
-
-class UnbeatableAi
+class UnbeatableAI
     attr_accessor :marker, :open_spot
 
 
@@ -44,8 +24,8 @@ class UnbeatableAi
             move = open_spot
         elsif check_for_center(board)
             move = open_spot
-        elsif strategy_for_opposite_corner(board)
-            move = 1                
+        elsif strategy_opposite_corners(board)
+            move = open_spot
         elsif strategy1_for_empty_corner(board)
             move = open_spot
         else edge_space(board)
@@ -84,26 +64,31 @@ class UnbeatableAi
     def check_for_center(board)
         if board[4] == " "
             @open_spot = 4
+        elsif board[4] == "x"
+            @open_spot = strategy1_for_empty_corner(board)                
         end
     end
 
-    def strategy_for_opposite_corner(board)
-        if board[0]=="x" && board[8]=="x"
-                @open_spot = 1
-        end
-    end
     def strategy1_for_empty_corner(board)
         corners = [0, 8, 2, 6]
         corners.each do |corner|
-            # if corner[0]=="x" && corner[8]=="x"
-            #     @open_spot = 1
-            # end
             if board[corner] == " "
                 @open_spot = corner
                 break
             end
         end
     open_spot 
+    end
+
+    def strategy_opposite_corners(board)
+        opposite_corners = [0, 8] || [2, 6]
+        # opposites.each do |opposite|
+            if opposite_corners == 1
+                @open_spot = edge_space(board)
+                # break
+            end
+        # end
+    open_spot
     end
 
     def edge_space(board)
@@ -117,4 +102,3 @@ class UnbeatableAi
     open_spot 
     end
 end
-
