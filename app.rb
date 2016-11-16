@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'rubygems'
-require_relative 'random_ai.rb'
-require_relative 'unbeatable_ai.rb'
-require_relative 'sequential_ai.rb'
-require_relative 'board.rb'
+require_relative '../lib/random_ai.rb'
+require_relative '../lib/unbeatable_ai.rb'
+require_relative '../lib/sequential_ai.rb'
+require_relative '../lib/board.rb'
 
 enable :sessions
 
@@ -41,21 +41,21 @@ post '/choose_opponent' do
     opponent = params[:opponent]
         if opponent == "1"
           session[:p2] = Human.new("O") 
-          erb :erb :opponent_name, :layout => :home_static_layout, :locals => { :board => session[:board].board_positions }
+          erb :opponent_name, :locals => { :board => session[:board].board_positions }
 
-	elsif player_2 == "sequential_ai"
+	elsif player_2 == "2"
 		session[:p2] = SequentialAI.new("O")
 		session[:name_player_2] = "Computer"
 
 		redirect '/get_move'
 
-	elsif player_2 == "random_ai"
+	elsif player_2 == "3"
 		session[:p2] = RandomAI.new("O")
 		session[:name_player_2] = "Computer"
 
 		redirect '/get_move'
 
-	else player_2 == "unbeatable_ai"
+	else player_2 == "4"
 		session[:p2] = UnbeatableAI.new("O")
 		session[:name_player_2] = "Computer"
 
